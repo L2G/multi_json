@@ -9,9 +9,13 @@ module MultiJson
 
       def activate
         if JSON::VERSION < GEM_VERSION
-          Kernel.warn "You are using an old or stdlib version of #{gem_name} gem\n" +
-            "Please upgrade to the recent version by adding this to your Gemfile:\n\n" +
-            "  gem '#{gem_name}', '~> #{GEM_VERSION}'\n"
+          Kernel.warn "You are using an old or stdlib version of the #{gem_name} gem.\n" +
+            "If you are using Bundler, please add this to your Gemfile:\n\n" +
+            "  gem '#{gem_name}', '~> #{GEM_VERSION}'\n\n" +
+            "For standalone Ruby code, please specify the gem version in your code before\n" +
+            "requiring it, like so:\n\n" +
+            "  gem '#{gem_name}', '~> #{GEM_VERSION}'\n" +
+            "  require '#{gem_name}'\n\n"
         end
       end
 
