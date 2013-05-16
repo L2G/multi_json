@@ -48,6 +48,9 @@ module MultiJson
     ['json/pure',    :json_pure]
   ]
 
+  VANILLA_GEMS        = [:json_gem, :json_pure]
+  VANILLA_GEM_VERSION = '~> 1.7.7'
+
   # The default adapter based on what you currently
   # have loaded and installed. First checks to see
   # if any adapters are already loaded, then checks
@@ -61,9 +64,10 @@ module MultiJson
 
     REQUIREMENT_MAP.each do |library, adapter|
       begin
+        gem(library, VANILLA_GEM_VERSION) if VANILLA_GEMS.include? adapter
         require library
         return adapter
-      rescue ::LoadError
+      rescue ::LoadError, ::Gem::LoadError
         next
       end
     end
